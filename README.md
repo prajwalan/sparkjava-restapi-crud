@@ -24,6 +24,7 @@ This is a sample REST API based on latest Java 8 and SparkJava framework. It dem
 GET /customers
 ```
 ```sh
+200 OK
 {
   "code": 0,
   "message": "",
@@ -51,5 +52,73 @@ GET /customers
       "zip_postalcode": 99998
     }
   ]
+}
+```
+
+```sh
+GET /customers/1
+```
+```sh
+200 OK
+{
+  "code": 0,
+  "message": "",
+  "result": [
+    {
+      "id": 1,
+      "firstname": "Anna",
+      "lastname": "Bedecs",
+      "address": "123 1st Street",
+      "city": "Seattle",
+      "country": "USA",
+      "business_phone": "(123)555-0100",
+      "email": "anna.bedecs@gmail.com",
+      "zip_postalcode": 99999
+    }
+  ]
+}
+```
+
+```sh
+GET /customers/100
+```
+```sh
+404 Not Found
+{
+  "code": -1,
+  "message": "Customer with id 100 not found"
+}
+```
+
+```sh
+POST /customers
+content-type: application/json
+{
+  "firstname": "aaa",
+  "lastname": "bbbb",
+  "address": "123 1st Street",
+  "city": "Seattle",
+  "country": "USA",
+  "business_phone": "(123)555-0100",
+  "email": "aaa.bbbb@gmail.com",
+  "zip_postalcode": 99999
+}
+```
+```sh
+200 OK
+{
+  "code": 0,
+  "message": "",
+  "result": {
+    "id": 3,
+    "firstname": "aaa",
+    "lastname": "bbb",
+    "address": "123 1st Street",
+    "city": "Seattle",
+    "country": "USA",
+    "business_phone": "(123)555-0100",
+    "email": "aaa.bbbb@gmail.com",
+    "zip_postalcode": 99999
+  }
 }
 ```
