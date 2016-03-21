@@ -45,6 +45,11 @@ public class CustomerController {
             return updateEntity(service, jsonConverter, req, res);
         } , CommonUtil.getJsonTransformer());
 
+        // -- Delete one specific entity
+        delete("/customers/:id", (req, res) -> {
+            return deleteOneEntity(service, req, res);
+        } , CommonUtil.getJsonTransformer());
+
         // -- Set proper content-type to all responses
         after((req, res) -> {
             res.type(Constants.STANDARD_RESPONSE_CONTENTTYPE);
@@ -85,6 +90,12 @@ public class CustomerController {
         Customer udpatedEntity = service.update(id, entityToUpdate);
 
         return new Response(udpatedEntity);
+    }
+
+    private Object deleteOneEntity(final CustomerService service, Request req, spark.Response res) throws NotFoundException {
+        int id = Integer.parseInt(req.params(":id"));
+        service.delete(id);
+        return new Response(0, "");
     }
 
     public void handleExceptions(final Gson jsonConverter) {

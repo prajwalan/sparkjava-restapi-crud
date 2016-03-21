@@ -43,4 +43,12 @@ public class CustomerService {
 
         return entity;
     }
+
+    public void delete(int id) throws NotFoundException {
+        if (!DemoStorage.customerMap.containsKey(id)) {
+            throw new NotFoundException("Customer with id " + id + " not found");
+        }
+
+        DemoStorage.customerMap.remove(id);
+    }
 }
