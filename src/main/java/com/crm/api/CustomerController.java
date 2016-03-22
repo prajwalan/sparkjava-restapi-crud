@@ -4,25 +4,26 @@ import static spark.Spark.*;
 
 import org.eclipse.jetty.http.HttpStatus;
 
-import com.crm.api.exception.InvalidPayloadException;
 import com.crm.api.exception.NotFoundException;
 import com.crm.api.response.Response;
 import com.crm.db.model.Customer;
 import com.crm.util.CommonUtil;
-import com.crm.util.Constants;
 import com.google.gson.Gson;
 
 import spark.Request;
 
-public class CustomerController {
+public class CustomerController extends BaseController {
 
     public CustomerController(final CustomerService service, final Gson jsonConverter) {
+        super(jsonConverter);
         initializeController(service, jsonConverter);
     }
 
     public void initializeController(final CustomerService service, final Gson jsonConverter) {
+
         // -- Get all entities
         get("/customers", (req, res) -> {
+
             return getAll(service);
         } , CommonUtil.getJsonTransformer());
 
@@ -33,14 +34,14 @@ public class CustomerController {
 
         // -- Add an entity
         post("/customers", (req, res) -> {
-            validate(req);
+            validateContentType(req);
 
             return addEntity(service, jsonConverter, req, res);
         } , CommonUtil.getJsonTransformer());
 
         // -- Update an entity
         post("/customers/:id", (req, res) -> {
-            validate(req);
+            validateContentType(req);
 
             return updateEntity(service, jsonConverter, req, res);
         } , CommonUtil.getJsonTransformer());
@@ -50,19 +51,6 @@ public class CustomerController {
             return deleteOneEntity(service, req, res);
         } , CommonUtil.getJsonTransformer());
 
-        // -- Set proper content-type to all responses
-        after((req, res) -> {
-            res.type(Constants.STANDARD_RESPONSE_CONTENTTYPE);
-        });
-
-        // -- Handle the exceptions
-        handleExceptions(jsonConverter);
-    }
-
-    public void validate(Request req) throws InvalidPayloadException {
-        if (req.contentType() == null || !req.contentType().toLowerCase().contains("application/json")) {
-            throw new InvalidPayloadException("Invalid content type: " + req.contentType());
-        }
     }
 
     public Response getAll(final CustomerService service) {
@@ -99,18 +87,4 @@ public class CustomerController {
         return new Response(0, "");
     }
 
-    public void handleExceptions(final Gson jsonConverter) {
-        exception(InvalidPayloadException.class, (ex, req, res) -> {
-            res.status(HttpStatus.BAD_REQUEST_400);
-            res.body(jsonConverter.toJson(new Response(Constants.RESPONSE_ERROR, ex.getMessage())));
-        });
-        exception(NotFoundException.class, (ex, req, res) -> {
-            res.status(HttpStatus.NOT_FOUND_404);
-            res.body(jsonConverter.toJson(new Response(Constants.RESPONSE_ERROR, ex.getMessage())));
-        });
-        exception(Exception.class, (ex, req, res) -> {
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR_500);
-            res.body(jsonConverter.toJson(new Response(Constants.RESPONSE_ERROR, ex.getMessage())));
-        });
-    }
 }

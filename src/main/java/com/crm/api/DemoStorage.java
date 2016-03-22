@@ -6,7 +6,7 @@ import java.util.Map;
 import com.crm.db.model.Customer;
 
 /**
- * Focus of this project is demonstration of Sparkjava REST API. Hence this temporary storage is created so as to skip the
+ * Focus of this project is demonstration of SparkJava REST API. Hence this temporary storage is created so as to skip the
  * database communication code. This is not meant to be used in any production system directly.
  * 
  */
@@ -15,12 +15,14 @@ public class DemoStorage {
     public static Map<Integer, Customer> customerMap = new HashMap<>();
     public static int nextCustomerId;
 
+    public static String username = "admin";
+    public static String password = "secret";
+
     static {
         DemoStorage.reset();
     }
 
     public static void reset() {
-
         customerMap.clear();
         customerMap.put(1, new Customer(1, "Anna", "Bedecs", "123 1st Street", "Seattle", "USA", "anna.bedecs@gmail.com",
                 "(123)555-0100", 99999));

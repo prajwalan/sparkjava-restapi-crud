@@ -2,12 +2,32 @@ package com.crm.api.integrationtest;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import org.eclipse.jetty.http.HttpStatus;
+import org.junit.BeforeClass;
+
+import com.crm.api.DemoStorage;
+import com.crm.api.response.EntityResponse;
+import com.crm.model.UserLogin;
+import com.crm.util.CommonUtil;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import spark.utils.IOUtils;
 
 public class BaseIntegrationTest {
+
+    protected static Gson jsonConverter;
+    protected Type stringEntityType = new TypeToken<EntityResponse<String>>() {
+    }.getType();
+
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        jsonConverter = CommonUtil.getJsonConvertor();
+    }
 
     protected TestHttpResponse request(String method, String path, String payload) throws IOException {
 
@@ -29,20 +49,35 @@ public class BaseIntegrationTest {
             }
             connection.connect();
 
-            String body = IOUtils.toString(connection.getInputStream());
+            String body = null;
+            if (connection.getResponseCode() == HttpStatus.OK_200 || connection.getResponseCode() == HttpStatus.CREATED_201) {
+                body = IOUtils.toString(connection.getInputStream());
+            }
             TestHttpResponse response = new TestHttpResponse(connection.getResponseCode(), body);
 
             return response;
         }
         finally {
-
             if (connection != null) {
-                if (connection.getInputStream() != null) {
-                    connection.getInputStream().close();
+                try {
+                    if (connection.getInputStream() != null) {
+                        connection.getInputStream().close();
+                    }
+                }
+                catch (Exception ex) {
+                    // Ignore
                 }
                 connection.disconnect();
             }
         }
     }
 
+    protected String login() throws IOException {
+
+        String payload = jsonConverter.toJson(new UserLogin(DemoStorage.username, DemoStorage.password));
+        TestHttpResponse response = request("POST", "/login", payload);
+
+        EntityResponse<String> loginResponse = jsonConverter.fromJson(response.body, stringEntityType);
+        return loginResponse.getResult();
+    }
 }
