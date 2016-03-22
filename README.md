@@ -21,7 +21,7 @@ The API implements [JWT](https://jwt.io/) token based security. As such a secure
 You may use admin/secret as demo username and password.
 
 ### Demo data
-Since the intent of this sample code is to demonstrate REST API functionality using SparkJava, database has been mocked in DemoStorage class. So all the customer records are just stored and retrieved from a hashmap. The username and password credentials are also set just as a constant. 
+Since the intent of this sample code is to demonstrate REST API functionality using SparkJava, database has been mocked in DemoStorage class. So all the customer records are just stored and retrieved from a hashmap. The username and password credentials are also set just as constants. 
 
 ### Response codes
 | HTTP Code | Description  |
