@@ -4,8 +4,10 @@ This is a sample REST API based on latest Java 8 and [SparkJava](http://sparkjav
 
 ### Building and running
 The project using Maven. So things should be easy and straight-forward.
-> Command to generate project files for importing in Eclipse: mvn clean eclipse:eclipse
-> Command to generate the jar file: mvn clean package
+| Command | Description  |
+| ------ | --------  |
+| ```sh mvn clean eclipse:eclipse``` | Command to generate project files for importing in Eclipse  |
+| ```sh mvn clean package``` | Command to generate the output jar file  |
 
 ### The API
 | Method | Request  | Description  |
