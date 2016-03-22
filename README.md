@@ -3,7 +3,7 @@
 This is a sample REST API based on latest Java 8 and [SparkJava](http://sparkjava.com/) framework. It demonstrates several key functionalities such as implementing different HTTP request routes, setting and checking the content-types, handling the exceptions and returning appropriate responses. 
 
 ### Building and running
-The project using Maven. So things should be easy and straight-forward.
+The project uses Maven. So things should be easy and straight-forward.
 
 | Command | Description |
 | ------ | -------- |
