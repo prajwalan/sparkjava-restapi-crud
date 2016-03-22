@@ -4,13 +4,13 @@ This is a sample REST API based on latest Java 8 and [SparkJava](http://sparkjav
 
 ### Building and running
 The project using Maven. So things should be easy and straight-forward.
-| Command | Description  |
-| ------ | --------  |
-| ```sh mvn clean eclipse:eclipse``` | Command to generate project files for importing in Eclipse  |
-| ```sh mvn clean package``` | Command to generate the output jar file  |
+| Command | Description |
+| ------ | -------- |
+| mvn clean eclipse:eclipse | Command to generate project files for importing in Eclipse  |
+| mvn clean package | Command to generate the output jar file  |
 
 ### The API
-| Method | Request  | Description  |
+| Method | Request  | Description |
 | ------ | ---------- | -------- |
 | POST | /login | Returns a JWS token in "result" field if the username and password is valid |
 | GET | /extend | Returns a new the JWS token for the same username |
