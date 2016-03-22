@@ -16,7 +16,7 @@ This is a sample REST API based on latest Java 8 and [SparkJava](http://sparkjav
 A different implementation may make use of PUT HTTP method also. For eg, when POST is used for update, then PUT may be used for adding. 
 
 ### Security
-The API implements [JWT](https://jwt.io/) token based security. As such a secure token needs to be sent as a URL parameter with all URLs except /login. See the example requests below for a sample. These tokens can be reused infinitely but they have a life time of 8 hours. So after 8 hours consumer must either login again or call /extend service to get a newer token. 
+The API implements [JWT](https://jwt.io/) token based security. As such a secure token needs to be sent as a URL parameter with all URLs except /login. See the example requests below in samples section. Each of these tokens may be reused infinitely but they have a life time of 8 hours for security reasons. So after 8 hours consumer must either login again or call /extend service to get a newer token. 
 
 ### Response codes
 | HTTP Code | Description  |
