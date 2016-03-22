@@ -1,15 +1,15 @@
-package com.demo.api;
+package com.crm.api;
 
 import static spark.Spark.*;
 
 import org.eclipse.jetty.http.HttpStatus;
 
-import com.demo.api.exception.InvalidPayloadException;
-import com.demo.api.exception.NotFoundException;
-import com.demo.api.response.Response;
-import com.demo.db.model.Customer;
-import com.demo.util.CommonUtil;
-import com.demo.util.Constants;
+import com.crm.api.exception.InvalidPayloadException;
+import com.crm.api.exception.NotFoundException;
+import com.crm.api.response.Response;
+import com.crm.db.model.Customer;
+import com.crm.util.CommonUtil;
+import com.crm.util.Constants;
 import com.google.gson.Gson;
 
 import spark.Request;
@@ -60,7 +60,7 @@ public class CustomerController {
     }
 
     public void validate(Request req) throws InvalidPayloadException {
-        if (req.contentType() == null || !req.contentType().equalsIgnoreCase("application/json")) {
+        if (req.contentType() == null || !req.contentType().toLowerCase().contains("application/json")) {
             throw new InvalidPayloadException("Invalid content type: " + req.contentType());
         }
     }
@@ -79,6 +79,7 @@ public class CustomerController {
         Customer entityToAdd = jsonConverter.fromJson(payload, Customer.class);
         Customer addedEntity = service.add(entityToAdd);
 
+        res.status(HttpStatus.CREATED_201);
         return new Response(addedEntity);
     }
 

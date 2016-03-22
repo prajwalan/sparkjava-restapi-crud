@@ -1,4 +1,4 @@
-package com.demo.db.model;
+package com.crm.db.model;
 
 import java.io.Serializable;
 

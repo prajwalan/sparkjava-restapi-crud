@@ -1,4 +1,4 @@
-package com.demo.util;
+package com.crm.util;
 
 public class Constants {
 

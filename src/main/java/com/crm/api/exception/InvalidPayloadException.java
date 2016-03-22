@@ -1,4 +1,4 @@
-package com.demo.api.exception;
+package com.crm.api.exception;
 
 @SuppressWarnings("serial")
 public class InvalidPayloadException extends Exception {

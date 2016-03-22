@@ -1,10 +1,10 @@
-package com.demo.api;
+package com.crm.api;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.demo.api.exception.NotFoundException;
-import com.demo.db.model.Customer;
+import com.crm.api.exception.NotFoundException;
+import com.crm.db.model.Customer;
 
 public class CustomerService {
 

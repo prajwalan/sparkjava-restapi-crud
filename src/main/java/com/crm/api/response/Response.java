@@ -1,14 +1,10 @@
-package com.demo.api.response;
+package com.crm.api.response;
 
-import com.demo.util.Constants;
+import com.crm.util.Constants;
 import com.google.gson.annotations.Expose;
 
-public class Response {
+public class Response extends BaseResponse {
 
-    @Expose
-    private int code;
-    @Expose
-    private String message;
     @Expose
     private Object result;
 
@@ -32,22 +28,6 @@ public class Response {
         this.code = code;
         this.message = message;
         this.result = result;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public Object getResult() {

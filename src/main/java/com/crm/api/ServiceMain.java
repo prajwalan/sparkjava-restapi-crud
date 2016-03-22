@@ -1,6 +1,6 @@
-package com.demo.api;
+package com.crm.api;
 
-import com.demo.util.CommonUtil;
+import com.crm.util.CommonUtil;
 
 public class ServiceMain {
 
