@@ -18,12 +18,17 @@ A different implementation may make use of PUT HTTP method also. For eg, when PO
 ### Security
 The API implements [JWT](https://jwt.io/) token based security. As such a secure token needs to be sent as a URL parameter with all URLs except /login. See the example requests below in samples section. Each of these tokens may be reused infinitely but they have a life time of 8 hours for security reasons. So after 8 hours consumer must either login again or call /extend service to get a newer token. 
 
+You may use admin/secret as demo username and password.
+
+### Demo data
+Since the intent of this sample code is to demonstrate REST API functionality using SparkJava, database has been mocked in DemoStorage class. So all the customer records are just stored and retrieved from a hashmap. The username and password credentials are also set just as a constant. 
+
 ### Response codes
 | HTTP Code | Description  |
 | ------ | -------- |
 | 200 | Operation successful |
 | 400 | Invalid payload or content-type |
-| 403 | Invalid credentails or authentication token |
+| 403 | Invalid credentials or authentication token |
 | 404 | Entity with given id not found |
 | 500 | Unexpected server error |
 
