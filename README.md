@@ -1,6 +1,6 @@
 # sparkjava-restapi-crud
 
-This is a sample REST API based on latest Java 8 and [SparkJava](http://sparkjava.com/) framework. It demonstrates several key functionalities such as implementing different HTTP request routes, setting and checking the content-types, handling the exceptions and returning appropriate responses. 
+This is an example implementation of a secure REST API based on Java 8 and [SparkJava](http://sparkjava.com/) framework. It demonstrates several key functionalities such as implementing different HTTP request routes, token based security, handling the exceptions and returning appropriate responses. 
 
 ### Building and running
 The project uses Maven. So things should be easy and straight-forward.
@@ -24,7 +24,7 @@ The project uses Maven. So things should be easy and straight-forward.
 A different implementation may make use of PUT HTTP method also. For eg, when POST is used for update, then PUT may be used for adding. 
 
 ### Security
-The API implements [JWT](https://jwt.io/) token based security. As such a secure token needs to be sent as a URL parameter with all URLs except /login. See the example requests below in samples section. Each of these tokens may be reused infinitely but they have a life time of 8 hours for security reasons. So after 8 hours consumer must either login again or call /extend service to get a newer token. 
+The API implements [JWT](https://jwt.io/) token based security. As such a secure token needs to be sent as a URL parameter with all URLs except /login. See the example requests below in samples section. Each of these tokens may be reused infinitely but they have a life time of 8 hours for security reasons. So after 8 hours consumer must either login again or call /extend service to get a newer token before 8 hours expire. 
 
 You may use admin/secret as demo username and password.
 
